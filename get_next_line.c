@@ -61,23 +61,3 @@ char	*move_to_next_line(char *file)
 	}
 	return (NULL);
 }
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
-int main(int ac, char **av) {
-	int fd;
-	char *line;
-
-	line = "ZAVAOUQUOI";
-	(void)ac;
-	(void)av;
-	fd = open("test.txt", O_RDONLY);
-	/*
-	close(fd);
-	fd = open("t.txt", O_RDONLY);
-	printf("get next line: %d\n", get_next_line(fd, &line));
-	 */
-	printf("line: %s\n", line);
-}
