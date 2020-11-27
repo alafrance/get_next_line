@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2020/11/16 00:04:40 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2020/11/27 13:20:59 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (buf);
 }
 
-int		is_newline(char *file)
+int		ft_strchr(char *file, int c)
 {
 	int i;
 
@@ -74,8 +74,8 @@ int		is_newline(char *file)
 		return (0);
 	while (file[i])
 	{
-		if (file[i] == '\n')
-			return (1);
+		if (file[i] == c)
+			return (i);
 		i++;
 	}
 	return (0);

@@ -20,8 +20,7 @@ int		get_next_line(int fd, char **line);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(char *src);
-int		put_line(int bytes_read, char **file, char **line);
-char	*move_to_next_line(char *file);
-char	*malloc_line(char *file, int b_read);
-int		is_newline(char *file);
+char	*ft_substr(char const *s, int end);
+void	*ft_strccpy(char *file, int c);
+int		ft_strchr(char *file, int c);
 #endif
