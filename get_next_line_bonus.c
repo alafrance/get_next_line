@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 11:59:28 by alafranc          #+#    #+#             */
-/*   Updated: 2020/12/01 15:33:36 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2020/12/01 16:54:45 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,17 @@ char	*ft_remove_first_line(char *file)
 
 char	*fill_filebuf(int fd, char *filebuf, int *b_read, int *eof)
 {
-	char		*buf;
+	char		buf[BUFFER_SIZE + 1];
 
-	if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (NULL);
+
 	if (ft_strchr(filebuf, '\n') >= 0 || (fd == 0 && filebuf != NULL))
 		return (filebuf);
 	while ((*b_read = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[*b_read] = '\0';
 		filebuf = ft_strjoin(filebuf, buf);
-		free(buf);
 		if (fd != 0 && ft_strchr(filebuf, '\n') != -1)
 			break ;
-		if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-			return (NULL);
 	}
 	if (*b_read == 0)
 		*eof = 1;
@@ -65,7 +61,7 @@ int		get_next_line(int fd, char **line)
 	int			eof;
 
 	eof = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1 || !line)
 		return (-1);
 	filebuf[fd] = fill_filebuf(fd, filebuf[fd], &b_read, &eof);
 	*line = ft_substr_line(filebuf[fd]);
