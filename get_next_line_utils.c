@@ -6,7 +6,7 @@
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 00:03:45 by alafranc          #+#    #+#             */
-/*   Updated: 2020/11/30 19:11:05 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2020/12/01 10:45:12 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int		ft_strchr(char *file, int c)
 char	*ft_substr_line(char *s)
 {
 	char	*buf;
-	int	size;
-	int	i;
-	int end;
+	int		size;
+	int		i;
+	int		end;
 
 	i = 0;
 	size = 0;
@@ -99,9 +99,6 @@ char	*ft_substr_line(char *s)
 		end = ft_strchr(s, '\n');
 	if (end == 0)
 		return (ft_strdup(""));
-	if (s == NULL)
-		return (NULL);
-
 	while (i < end && s[i])
 		i++;
 	if (!(buf = malloc(sizeof(char) * (i + 1))))
