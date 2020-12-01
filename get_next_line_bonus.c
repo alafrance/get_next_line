@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 11:59:28 by alafranc          #+#    #+#             */
-/*   Updated: 2020/12/01 15:29:29 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2020/12/01 15:33:36 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_remove_first_line(char *file)
 {
@@ -35,7 +35,7 @@ char	*ft_remove_first_line(char *file)
 	return (buf);
 }
 
-char	*fill_filebuf(int fd, char *filebuf, int *b_read)
+char	*fill_filebuf(int fd, char *filebuf, int *b_read, int *eof)
 {
 	char		*buf;
 
@@ -53,20 +53,24 @@ char	*fill_filebuf(int fd, char *filebuf, int *b_read)
 		if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 			return (NULL);
 	}
+	if (*b_read == 0)
+		*eof = 1;
 	return (filebuf);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static int	b_read;
-	static char *filebuf;
+	int			b_read;
+	static char *filebuf[4096];
+	int			eof;
 
+	eof = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
 		return (-1);
-	filebuf = fill_filebuf(fd, filebuf, &b_read);
-	*line = ft_substr_line(filebuf);
-	filebuf = ft_remove_first_line(filebuf);
-	if (filebuf == NULL || (b_read == 0 && filebuf[0] == '\0'))
+	filebuf[fd] = fill_filebuf(fd, filebuf[fd], &b_read, &eof);
+	*line = ft_substr_line(filebuf[fd]);
+	filebuf[fd] = ft_remove_first_line(filebuf[fd]);
+	if (filebuf[fd] == NULL || (eof && filebuf[fd][0] == '\0'))
 		return (0);
 	else
 		return (1);

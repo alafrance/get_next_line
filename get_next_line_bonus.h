@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alafranc <alafranc@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 23:59:34 by alafranc          #+#    #+#             */
-/*   Updated: 2020/12/01 15:29:07 by alafranc         ###   ########lyon.fr   */
+/*   Updated: 2020/12/01 15:22:37 by alafranc         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,6 +23,6 @@ char	*ft_strdup(char *src);
 void	*ft_strccpy(char *file, int c);
 int		ft_strchr(char *file, int c);
 char	*ft_substr_line(char *s);
+char	*fill_filebuf(int fd, char *filebuf, int *b_read, int *eof);
 char	*ft_remove_first_line(char *file);
-char	*fill_filebuf(int fd, char *filebuf, int *b_read);
 #endif
